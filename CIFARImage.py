@@ -3,14 +3,20 @@ import cPickle as pickle
 import numpy as np
 
 
+def unpickle(filename):
+    fo = open(filename, 'rb')
+    dict = pickle.load(fo)
+    fo.close()
+    return dict
+
+
 def load_CIFAR_batch(filename):
     """ load single batch of cifar """
-    with open(filename, 'rb') as f:
-        datadict = pickle.load(f)
-        X = datadict['data']
-        Y = datadict['labels']
-        X = X.reshape(10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
-        Y = np.array(Y)
+    datadict = unpickle(filename)
+    X = datadict['data']
+    Y = datadict['labels']
+    X = X.reshape(10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
+    Y = np.array(Y)
     return X, Y
 
 
@@ -30,4 +36,4 @@ def load_CIFAR10(ROOT):
     return Xtr, Ytr, Xte, Yte
 
 
-load_CIFAR10('/u01/package/cifar-10-batches-py')
+#load_CIFAR10('/u01/package/cifar-10-batches-py')

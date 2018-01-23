@@ -20,3 +20,6 @@ class NearestNeighbor(object):
             min_index = np.argmin(distances)
             Ypred[i] = self.ytr[min_index]
         return Ypred
+
+
+#nn = NearestNeighbor()
